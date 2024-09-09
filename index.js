@@ -6,18 +6,19 @@ app = express(),
 http = require("node:http"),
 rateLimit = require("express-rate-limit");
 const db = require('./db');
+const helmet = require('helmet');
 
 const { URL_AUDIENCE, API_PORT } = process.env; 
 
 app.use(helmet());
 
-/*
+
 const origin = cors({
 	origin: URL_AUDIENCE,
 	optionsSuccessStatus: 200 // For legacy browser support
-})
-app.use(origin)*/
-app.use(cors())
+});
+app.use(origin);
+//app.use(cors())
 
 const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
